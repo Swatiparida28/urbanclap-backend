@@ -1,6 +1,9 @@
 const express = require('express')
 const userLoginModel=require('./models/userlogin')
 const storeLoginModel=require('./models/storelogin')
+const profileModel=require('./models/profile')
+const registerModel=require('./models/register')
+const serviceProviderModel=require('./models/serviceprovider')
 
 
 const database=require('./database/connection')
@@ -23,7 +26,22 @@ app.post("/userlogin",async(req,res)=>{
        res.send(e)
     }
   })
-  app.post("/storelogin",async(req,res)=>{
+
+
+  app.post("/userRegister",async(req,res)=>{
+    try{
+       const login=new registerModel(req.body)
+       const response=await login.save()
+       res.send({
+        code:200,
+        result:response
+       })
+    }catch(e){
+       res.send(e)
+    }
+  })
+
+  app.post("/storeLogin",async(req,res)=>{
     try{
        const login=new storeLoginModel(req.body)
        const response=await login.save()
@@ -36,6 +54,35 @@ app.post("/userlogin",async(req,res)=>{
     }
   })
 
+  app.post("/userProfile",async(req,res)=>{
+    try{
+       const login=new profileModel(req.body)
+       const response=await login.save()
+       res.send({
+        code:200,
+        result:response
+       })
+    }catch(e){
+       res.send(e)
+    }
+  })
+
+  app.post("/serviceprovider",async(req,res)=>{
+    try{
+       const login=new serviceProviderModel(req.body)
+       const response=await login.save()
+       res.send({
+        code:200,
+        result:response
+       })
+    }catch(e){
+       res.send(e)
+    }
+  })
+
+  
+
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(` Urbanclap app running at http://localhost:${port}`)
 })
