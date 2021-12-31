@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const url="mongodb+srv://urbanclone:swati123@urbanclap.39k5g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const url="mongodb+srv://urbanclone:swati123@urbanclap.39k5g.mongodb.net/urbanclapclone?retryWrites=true&w=majority";
 
 mongoose.connect(url,{
     useNewUrlParser:true

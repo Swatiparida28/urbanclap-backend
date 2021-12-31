@@ -3,19 +3,23 @@ const mongoose=require("mongoose");
 const profile=new mongoose.Schema({
   name:{
         type:String,
-        required:true,
-        
     },
-mobileNumber:{
+     mobileNumber:{
       type:String,
-      required:true,
-      unique:true,
     },
     email:{
         type:String,
-        required:true,
-        unique:true,
-      }
+      },
+    password:{
+      type:String,
+    },
+   createdAt:{
+     type:String
+   },
+   updatedAt:{
+     type:String
+   }
+
 })
-const profileModel=new mongoose.model("userProfile",profile)
+const profileModel=new mongoose.model("userprofile",profile)
 module.exports=profileModel;

@@ -5,84 +5,15 @@ const profileModel=require('./models/profile')
 const registerModel=require('./models/register')
 const serviceProviderModel=require('./models/serviceprovider')
 
-
+const userRoute=require('./routers/userRoute');
 const database=require('./database/connection')
 const app = express();
 const port = 4000;
 app.use(express.json())
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello World!') 
 })
-
-app.post("/userlogin",async(req,res)=>{
-    try{
-       const login=new userLoginModel(req.body)
-       const response=await login.save()
-       res.send({
-        code:200,
-        result:response
-       })
-    }catch(e){
-       res.send(e)
-    }
-  })
-
-
-  app.post("/userRegister",async(req,res)=>{
-    try{
-       const login=new registerModel(req.body)
-       const response=await login.save()
-       res.send({
-        code:200,
-        result:response
-       })
-    }catch(e){
-       res.send(e)
-    }
-  })
-
-  app.post("/storeLogin",async(req,res)=>{
-    try{
-       const login=new storeLoginModel(req.body)
-       const response=await login.save()
-       res.send({
-        code:200,
-        result:response
-       })
-    }catch(e){
-       res.send(e)
-    }
-  })
-
-  app.post("/userProfile",async(req,res)=>{
-    try{
-       const login=new profileModel(req.body)
-       const response=await login.save()
-       res.send({
-        code:200,
-        result:response
-       })
-    }catch(e){
-       res.send(e)
-    }
-  })
-
-  app.post("/serviceprovider",async(req,res)=>{
-    try{
-       const login=new serviceProviderModel(req.body)
-       const response=await login.save()
-       res.send({
-        code:200,
-        result:response
-       })
-    }catch(e){
-       res.send(e)
-    }
-  })
-
-  
-
-
+app.use("/user",userRoute);
 app.listen(port, () => {
-  console.log(` Urbanclap app running at http://localhost:${port}`)
+  console.log(`Urbanclap app running at http://localhost:${port}`)
 })
