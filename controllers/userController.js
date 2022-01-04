@@ -138,6 +138,108 @@ try {
             }
         })
     }
+
+
+
+    exports.SERVICE_PROVIDER = async function (req, res) {
+
+        let { email, password, confirm_password } = req.body;
+        if (email == true) {
+            return res.send({
+                code: 500,
+                msg: "email  is required"
+            })
+        } else if (password == undefined || password == "") {
+            return res.send({
+                code: 500,
+                msg: "password is required"
+            })
+        } else if (
+            confirm_password == undefined || confirm_password == ""
+        ) {
+            return res.send({
+                code: 500,
+                msg: "confirm_password is required"
+            })
+        } else if (password.localeCompare(confirm_password) != 0) {
+            return res.send({
+                code: 500,
+                msg: "password and confirm_paasword is not same"
+            })
+        }
+        let data = { email: email, password: password, createdAt: new Date, updatedAt: new Date }
+        const response = await userProfile.create(data, (err, result) => {
+            if (!err) {
+                return res.send({
+                    code: 200,
+                    msg: "Successfully Account created",
+                    result: {
+                        id: result._id
+                    }
+                })
+            } else {
+                return res.send({
+                    code: 500,
+                    msg: "failed to create Account",
+                    result: err
+                })
+            }
+        })
+    }
+ 
+    
+
+    exports.SERVICES= async function (req, res) {
+
+        let { email, password, confirm_password } = req.body;
+        if (email == true) {
+            return res.send({
+                code: 500,
+                msg: "email  is required"
+            })
+        } else if (password == undefined || password == "") {
+            return res.send({
+                code: 500,
+                msg: "password is required"
+            })
+        } else if (
+            confirm_password == undefined || confirm_password == ""
+        ) {
+            return res.send({
+                code: 500,
+                msg: "confirm_password is required"
+            })
+        } else if (password.localeCompare(confirm_password) != 0) {
+            return res.send({
+                code: 500,
+                msg: "password and confirm_paasword is not same"
+            })
+        }
+        let data = { email: email, password: password, createdAt: new Date, updatedAt: new Date }
+        const response = await userProfile.create(data, (err, result) => {
+            if (!err) {
+                return res.send({
+                    code: 200,
+                    msg: "Successfully Account created",
+                    result: {
+                        id: result._id
+                    }
+                })
+            } else {
+                return res.send({
+                    code: 500,
+                    msg: "failed to create Account",
+                    result: err
+                })
+            }
+        })
+    }
+ 
+
+
+
+
+
 } catch (e) {
     console.log(e);
 }
